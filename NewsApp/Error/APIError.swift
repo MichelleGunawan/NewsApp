@@ -7,15 +7,15 @@
 
 import Foundation
 
-enum APIError: Error{
+enum APIError: Error {
     case decodingError
     case errorCode(Int)
     case unknown
 }
 
-extension: LocalizedError{
+extension APIError: LocalizedError {
     var errorDescription: String? {
-        switch self{
+        switch self {
         case .decodingError:
             return "Failed to decode the object from the service"
         case .errorCode(let code):
