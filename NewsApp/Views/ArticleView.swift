@@ -42,19 +42,44 @@ struct ArticleView: View {
                     // or any default text in case title is nil
                 }
 
-                // Display article source
-                if let source = article.source {
-                    Text(source)
-                        .foregroundColor(.gray)
-                        .font(.footnote)
-                } else {
-                    Text("N/A")
-                        .foregroundColor(.gray)
-                        .font(.footnote)
+                HStack {
+                    // Display article source
+                    if let source = article.source {
+                        Text(source)
+                            .foregroundColor(.gray)
+                            .font(.footnote)
+                    } else {
+                        Text("N/A")
+                            .foregroundColor(.gray)
+                            .font(.footnote)
+                    }
+
+                    Spacer()
+
+                    // Display article date
+                    if let articleDate = article.date,
+                       let date = formattedDate(articleDate)
+                    {
+                        Text(date)
+                            .foregroundColor(.gray)
+                            .font(.footnote)
+                    } else {
+                        Text("")
+                            .foregroundColor(.gray)
+                            .font(.footnote)
+                    }
                 }
             }
         }
     }
+}
+
+// Function to format Date to String
+func formattedDate(_ date: Date) -> String? {
+    let formatter = DateFormatter()
+    formatter.dateStyle = .medium
+    formatter.timeStyle = .short
+    return formatter.string(from: date)
 }
 
 // Placeholder image if no image found
